@@ -1,0 +1,260 @@
+:root {
+    --bg-color-sidebar: #1e213a;
+    --bg-color-content: #100E1D;
+    --main-txt-color: #E7E7EB;
+    --second-txt-color: #A09FB1; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    border: none;
+    text-decoration: none;
+    outline: none !important;
+    font-family: 'Raleway', sans-serif;
+}
+
+body {
+    color: var(--main-txt-color);
+    font-size: 1rem;
+}
+
+#icon-actual-wheater-state {
+    width: 202px;
+    height: 234px;
+}
+
+#temperature {
+    font-size: 6rem;
+    font-weight: 500;
+}
+
+#temperature span {
+    font-size: 2rem;
+}
+
+#actual-wheater-state {
+    font-size: 2rem;
+    color: var(--second-txt-color);
+    font-weight: 600;
+}
+
+#actual-day {
+    display: flex;
+    align-items: center;
+    color: var(--second-txt-color);
+    gap: 1rem;
+}
+
+#current-location {
+    display: flex;
+    gap: 1rem;
+    color: var(--second-txt-color);
+}
+
+#procurar {
+    font-weight: 600;
+    color: var(--main-txt-color);
+    background-color: #3C47E9;
+    padding: 1.5rem;
+    cursor: pointer;
+}
+
+
+
+.fa-circle {
+    font-size: .2rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.wheater-app {
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    flex: 1;
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: var(--bg-color-sidebar);
+    background-image: url(./assets/img/Cloud-background.png);
+    background-repeat: no-repeat;
+    background-position: 50% 25%;
+    background-size: 50rem 23.5rem;
+}
+
+.sidebar nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+    margin-bottom: 3rem;
+}
+
+.search-btn {
+    padding: .8rem 1.2rem;
+    border-radius: 5px;
+    color: var(--main-txt-color);
+    background-color: #6E707A;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.search-sidebar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 1;
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: var(--bg-color-sidebar);
+}
+
+.search-sidebar button {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    border: none;
+    background: transparent;
+}
+
+.fa-xmark {
+    font-size: 2rem;
+    width: fit-content;
+    color: var(--main-txt-color);
+    cursor: pointer;
+}
+
+.search-sidebar nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.fa-magnifying-glass {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--second-txt-color);
+    padding: 1rem;
+    color: var(--second-txt-color);
+}
+
+.fa-magnifying-glass input {
+    width: 18rem;
+    height: 2rem;
+    background: transparent;
+    margin: 0 1rem;
+    font-size: 1.3rem;
+    color: var(--second-txt-color);
+}
+
+.location-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-txt-color);
+    font-size: 1.3rem;
+    background-color: #6E707A;
+    cursor: pointer;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex: 2;
+    padding: 6rem;
+    background-color: var(--bg-color-content);
+}
+
+.units-btn {
+    display: flex;
+    gap: .6rem;
+    width: 100%;
+    align-items: center;
+    justify-content: end;
+}
+
+.celcius-btn,
+.fahrenheit-btn {
+    font-size: 1.1rem;
+    font-weight: 700;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #585676;
+    color: var(--main-txt-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: var(--main-txt-color);
+    color: #110E3C;
+}
+
+.forequest-of-the-week {
+    margin: 2rem;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.card {
+    width: 8.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-color-sidebar);
+}
+
+.card h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 19px;
+}
+
+.card img {
+    width:3.528rem;
+    height: 3.875rem;
+}
+
+.card p {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.minima {
+    color: var(--second-txt-color);
+}
+
+@media (max-width: 1000px) {
+    .wheater-app {
+        display: flex;
+        flex-direction: column;
+    }
+}

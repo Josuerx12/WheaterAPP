@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheater APP</title>
+    <!-- CDN Font-Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/global.css">
+    <!-- Index Script -->
+    <script src="./scripts/script.js" defer></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet"> 
+    <!-- FIM -->
+</head>
+<body>
+    <main class="wheater-app">
+        <aside class="sidebar">
+            <nav>
+                <button class="search-btn">
+                    Procure por Lugares
+                </button>
+                <button class="fa-solid fa-location-crosshairs location-btn" name="abrir no maps"></button>
+            </nav>
+            <img src="./assets/icons/Shower.png" id="icon-actual-wheater-state" alt="icone do estado do tempo atual">
+            <p id="temperature">15<span id="unit">°C</span></p>
+            <p id="actual-wheater-state">Chovendo</p>
+            <p id="actual-day">Hoje <i class="fa-solid fa-circle"> </i> <span id="date">Seg, 2 Maio</span></p>
+            <p id="current-location"><i class="fa-solid fa-location-dot"></i> Campos - RJ</p>
+        </aside>
+        <aside class="search-sidebar hidden">
+            <button>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <nav>
+                <i class="fa-solid fa-magnifying-glass">
+                    <input type="text" name="localizacao" placeholder="Digite o local de consulta" id="search-location">
+                </i>
+                <button type="submit" id="procurar">Localizar</button>
+            </nav>
+        </aside>
+        <section class="content">
+            <div class="units-btn">
+                <button class="celcius-btn selected">°C</button>
+                <button class="fahrenheit-btn">°F</button>
+            </div>
+            <div class="forequest-of-the-week">
+                <div class="card">
+                    <h3 class="day-of-the-week">segunda</h3>
+                    <img src="./assets/icons/Clear.png" alt="icone do estado de temperatura do dia">
+                    <p> <span id="maxima">16<span class="unit">°C</span></span> <span class="minima">11<span class="unit">°C</span></span></p>
+                </div>
+                <div class="card">
+                    <h3 class="day-of-the-week">segunda</h3>
+                    <img src="./assets/icons/Clear.png" alt="icone do estado de temperatura do dia">
+                    <p> <span id="maxima">16<span class="unit">°C</span></span> <span class="minima">11<span class="unit">°C</span></span></p>
+                </div>
+                <div class="card">
+                    <h3 class="day-of-the-week">segunda</h3>
+                    <img src="./assets/icons/Clear.png" alt="icone do estado de temperatura do dia">
+                    <p> <span id="maxima">16<span class="unit">°C</span></span> <span class="minima">11<span class="unit">°C</span></span></p>
+                </div>
+                <div class="card">
+                    <h3 class="day-of-the-week">segunda</h3>
+                    <img src="./assets/icons/Clear.png" alt="icone do estado de temperatura do dia">
+                    <p> <span id="maxima">16<span class="unit">°C</span></span> <span class="minima">11<span class="unit">°C</span></span></p>
+                </div>
+                <div class="card">
+                    <h3 class="day-of-the-week">segunda</h3>
+                    <img src="./assets/icons/Clear.png" alt="icone do estado de temperatura do dia">
+                    <p> <span id="maxima">16<span class="unit">°C</span></span> <span class="minima">11<span class="unit">°C</span></span></p>
+                </div>
+            </div>
+            <h2>Previsão de Hoje</h2>
+
+                <div class="highlights">
+                    <div class="wind-container">
+                        <div class="hightlights">
+                            <h3>Status do vento</h3>
+                            <p class="wind-force">7<span>mph</span></p>
+                            <p id="wind-direction"><i class="fa-solid fa-location-arrow"></i> WSW</p>
+                        </div>
+                    </div>
+                    <div class="humidity-container">
+                        <div class="hightlights">
+                            <h3>Humidity</h3>
+                            <p id="humidity-percentage">84 <span>%</span></p>
+
+                            <div>
+                                <p>
+                                    <span>0</span>
+                                    <span>50</span>
+                                    <span>100</span>
+                                </p>
+                                <div id="bar-percentage">
+                                    <div id="percentage"></div>
+                                </div>
+                                <p>%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visibility-container">
+                        <div class="hightlights">
+                            <h3>Visibility</h3>
+                            <p id="visibility-value">6,4 <span>miles</span></p>
+                        </div>
+                    </div>
+                    <div class="air-pressure-container">
+                        <div class="hightlights">
+                            <h3>Air Pressure</h3>
+                            <p id="pressure-value">998 <span>mb</span></p>
+                        </div>
+                    </div>
+                </div>
+            <footer>
+                Created by Josue Carvalho - devChallengers.io
+            </footer>
+        </section>
+
+    </main>
+</body>
+</html>
