@@ -14,6 +14,7 @@
     text-decoration: none;
     outline: none !important;
     font-family: 'Raleway', sans-serif;
+    cursor: default;
 }
 
 body {
@@ -22,8 +23,8 @@ body {
 }
 
 #icon-actual-wheater-state {
-    width: 202px;
-    height: 234px;
+    width: 10.625rem;
+    height: 12.625rem;
 }
 
 #temperature {
@@ -90,7 +91,7 @@ body {
     background-image: url(./assets/img/Cloud-background.png);
     background-repeat: no-repeat;
     background-position: 50% 25%;
-    background-size: 50rem 23.5rem;
+    background-size: 35rem 23.5rem;
 }
 
 .sidebar nav {
@@ -211,7 +212,7 @@ body {
 }
 
 .forequest-of-the-week {
-    margin: 2rem;
+    margin: 2rem 0;
     display: flex;
     width: 100%;
     align-items: center;
@@ -229,6 +230,7 @@ body {
     gap: 1rem;
     padding: 1rem;
     background-color: var(--bg-color-sidebar);
+    border-radius: .2rem;
 }
 
 .card h3 {
@@ -252,9 +254,181 @@ body {
     color: var(--second-txt-color);
 }
 
-@media (max-width: 1000px) {
+.wheater-app h2 {
+    margin: 2rem 0;
+}
+
+.highlights {
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+    gap: 5rem;
+    margin: 1rem 0;
+}
+
+.wind-container,
+.humidity-container {
+    width: 328px;
+    height: 204px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    flex: 1;
+    justify-content: space-around;
+    border-radius: .2rem;
+    background-color: var(--bg-color-sidebar);
+}
+
+.wind-container .wind-force,
+.humidity-container .humidity-percentage {
+    font-weight: 700;
+    font-size: 4rem;
+}
+
+.wind-container .wind-force span{
+    font-weight: 400;
+    font-size: 2rem;
+}
+
+.fa-location-arrow {
+    transform: rotate(315deg);
+    padding: .6rem;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+.humidity-container h3,
+.highlights .visibility-container h3,
+.wind-container h3,
+.air-pressure-container h3 {
+    font-weight: 500;
+    width: 250px;
+    text-align: center;
+}
+
+.humidity-container .humidity-percentage span {
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.humidity-container div p {
+    display: flex;
+    justify-content: space-between;
+    font-size: .8rem;
+    font-weight: 700;
+    margin: .2rem 0;
+}
+
+.humidity-container div p:last-child {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#bar-percentage {
+    width: 229px;
+    height: 8px;
+    background-color: var(--main-txt-color);
+    border-radius: 80px;
+}
+
+#percentage {
+    width: 84%;
+    height: 8px;
+    border-radius: 80px 0 0 80px;
+    background: #FFEC65;
+    z-index: 1;
+}
+
+#wind-direction {
+    display: flex;
+    gap: .8rem;
+    justify-content: center;
+    align-items: center;
+    line-height: 16px;
+    font-weight: 500;
+    font-size: .9rem;
+}
+
+.visibility-container,
+.air-pressure-container {
+    width: 328px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    flex: 1;
+    justify-content: space-around;
+    border-radius: .2rem;
+    background-color: var(--bg-color-sidebar);
+}
+
+#visibility-value,
+#pressure-value {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+#visibility-value span,
+#pressure-value span {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    margin: 3rem 0 0 0;
+}
+
+@media (max-width: 1100px) {
     .wheater-app {
         display: flex;
         flex-direction: column;
+    }
+    .forequest-of-the-week {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+    .card {
+        font-size: .8rem;
+        width: 6rem;
+        border-radius: .2rem;
+    }
+    .card p {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    }
+}
+
+@media (max-width: 675px) {
+    .forequest-of-the-week {
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-items: center;
+    }
+    .content {
+        padding: .5rem;
+    }
+    .humidity-container h3,
+    .highlights .visibility-container h3,
+    .wind-container h3,
+    .air-pressure-container h3 {
+        max-width: 250px;
+}
+}
+
+@media (max-width: 450px) {
+    #icon-actual-wheater-state {
+        width: 9.625rem;
+        height: 11.625rem;
+    }
+    .forequest-of-the-week {
+        grid-template-columns: 1fr 1fr;
+    }
+    .sidebar {
+    background-size: 30rem 16.5rem;
     }
 }

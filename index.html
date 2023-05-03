@@ -11,6 +11,8 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Global CSS -->
     <link rel="stylesheet" href="./styles.css">
+    <!-- Axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Index Script -->
     <script src="./scripts/script.js" defer></script>
     <!-- Google Fonts -->
@@ -26,13 +28,13 @@
                 <button class="search-btn">
                     Procure por Lugares
                 </button>
-                <button class="fa-solid fa-location-crosshairs location-btn" name="abrir no maps"></button>
+                <button class="fa-solid fa-location-crosshairs location-btn" name="Usar localização"></button>
             </nav>
             <img src="./assets/icons/Shower.png" id="icon-actual-wheater-state" alt="icone do estado do tempo atual">
-            <p id="temperature">15<span id="unit">°C</span></p>
-            <p id="actual-wheater-state">Chovendo</p>
-            <p id="actual-day">Hoje <i class="fa-solid fa-circle"> </i> <span id="date">Seg, 2 Maio</span></p>
-            <p id="current-location"><i class="fa-solid fa-location-dot"></i> Campos - RJ</p>
+            <p id="temperature"></p>
+            <p id="actual-wheater-state"></p>
+            <p id="actual-day"></p>
+            <p id="current-location"><i class="fa-solid fa-location-dot"></i></p>
         </aside>
         <aside class="search-sidebar hidden">
             <button>
@@ -81,17 +83,13 @@
 
                 <div class="highlights">
                     <div class="wind-container">
-                        <div class="hightlights">
                             <h3>Status do vento</h3>
                             <p class="wind-force">7<span>mph</span></p>
-                            <p id="wind-direction"><i class="fa-solid fa-location-arrow"></i> WSW</p>
-                        </div>
+                            <p id="wind-direction"><i class="fa-solid fa-location-arrow"></i>N</p>
                     </div>
                     <div class="humidity-container">
-                        <div class="hightlights">
                             <h3>Humidity</h3>
-                            <p id="humidity-percentage">84 <span>%</span></p>
-
+                            <p class="humidity-percentage">84<span>%</span></p>
                             <div>
                                 <p>
                                     <span>0</span>
@@ -103,19 +101,16 @@
                                 </div>
                                 <p>%</p>
                             </div>
-                        </div>
                     </div>
+                </div>
+                <div class="highlights">
                     <div class="visibility-container">
-                        <div class="hightlights">
                             <h3>Visibility</h3>
                             <p id="visibility-value">6,4 <span>miles</span></p>
-                        </div>
                     </div>
                     <div class="air-pressure-container">
-                        <div class="hightlights">
                             <h3>Air Pressure</h3>
                             <p id="pressure-value">998 <span>mb</span></p>
-                        </div>
                     </div>
                 </div>
             <footer>
