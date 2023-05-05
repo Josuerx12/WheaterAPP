@@ -10,6 +10,132 @@ const currentLocation = document.querySelector('#current-location')
 const exitSearch = document.querySelector('.fa-xmark')
 const inputSearch = document.querySelector('#search-location')
 const searchLocation = document.querySelector('#procurar')
+const units = document.querySelectorAll('.unit')
+// content item's
+
+const cardsOfWeek = document.querySelector('.forequest-of-the-week')
+
+//units
+
+const celciusBtn = document.querySelector('.celcius-btn')
+const fahrenheitBtn = document.querySelector('.fahrenheit-btn')
+
+celciusBtn.addEventListener('click', () => {
+    celciusBtn.classList.toggle('selected')
+    fahrenheitBtn.classList.toggle('selected')
+})
+fahrenheitBtn.addEventListener('click', () => {
+    celciusBtn.classList.toggle('selected')
+    fahrenheitBtn.classList.toggle('selected')
+})
+
+    searchLocation.addEventListener('click', () => {
+        if (celciusBtn.classList.contains('selected')){
+            const inputLocationValue = inputSearch.value
+            console.log(inputLocationValue)
+            sidebar.classList.toggle('hidden')
+            searchSidebar.classList.toggle('hidden')
+            inputSearch.value = ''
+            units.innerText = `°C`
+                api.get(`forecast.json?key=${apiKey}&q=${inputLocationValue}&days=5&aqi=yes&alerts=no&lang=pt`)
+                .then(weather => {
+                    const weatherData = weather.data
+                    console.log(weatherData)
+                    currentLocation.innerHTML = `<p id="current-location"><i class="fa-solid fa-location-dot"></i> ${weatherData.location.name}</p>`
+                    temperature.innerHTML = `<p id="temperature">${weatherData.current.temp_c.toFixed(0)}<span id="unit">°C</span></p>`
+                    iconActualWheaterState.src = `${weatherData.current.condition.icon}`
+                    actualWheaterState.innerText = `${weatherData.current.condition.text}`
+                    const highlights = weatherData.forecast.forecastday
+    
+                    highlights.map((tempo) => {
+                        console.log(tempo.date)
+                        console.log(tempo.day)
+                        const newHtml = `
+                        <div class="card">
+                            <h3 class="day-of-the-week">${tempo.date}</h3>
+                            <img src="${tempo.day.condition.icon}" alt="icone do estado de temperatura do dia">
+                            <p> <span id="maxima">${tempo.day.maxtemp_c.toFixed(0)}<span class="unit">°C</span></span> <span class="minima">${tempo.day.mintemp_c.toFixed(0)}<span class="unit">°C</span></span></p>
+                        </div>
+                        `
+                        cardsOfWeek.innerHTML += newHtml
+                    })
+                    //Wind force and direction
+                    const windForce = document.querySelector('.wind-force')
+                    const windDirection = document.querySelector('#wind-direction')
+                    const windDegree = document.querySelector('.fa-location-arrow')
+                    windForce.innerHTML = `<p class="wind-force">${weatherData.current.wind_mph} <span>mph</span></p>`
+                    windDirection.innerHTML = `<p id="wind-direction"><i class="fa-solid fa-location-arrow"></i>${weatherData.current.wind_dir}</p>`
+                    windDegree.style.transform = `rotate(${weatherData.current.wind_degree})`
+                    //humidity
+                    const percentageHum = document.querySelector('#percentage')
+                    const humidityPer = document.querySelector('.humidity-percentage')
+                    humidityPer.innerHTML = `<p class="humidity-percentage">${weatherData.current.humidity}<span>%</span></p>`
+                    percentageHum.style.width = `${weatherData.current.humidity}`
+                    //visibility
+                    const visibility = document.querySelector('#visibility-value')
+                    visibility.innerHTML = `<p id="visibility-value">${weatherData.current.vis_miles} <span>miles</span></p>`
+                    // air pression
+                    const pressureValue = document.querySelector('#pressure-value')
+                    pressureValue.innerHTML = `<p id="pressure-value">${weatherData.current.pressure_mb} <span>mb</span></p>`
+                })
+                .catch(error => {
+                    alert('Erro na busca, digite o nome de um lugar ou corrija o nome digitado!')
+                    inputSearch.value = ''
+                })
+        } else {
+        const inputLocationValue = inputSearch.value
+        console.log(inputLocationValue)
+        sidebar.classList.toggle('hidden')
+        searchSidebar.classList.toggle('hidden')
+        inputSearch.value = ''
+        units.innerText += `°F`
+            api.get(`forecast.json?key=${apiKey}&q=${inputLocationValue}&days=5&aqi=yes&alerts=no&lang=pt`)
+            .then(weather => {
+                const weatherData = weather.data
+                console.log(weatherData)
+                currentLocation.innerHTML = `<p id="current-location"><i class="fa-solid fa-location-dot"></i> ${weatherData.location.name}</p>`
+                temperature.innerHTML = `<p id="temperature">${weatherData.current.temp_f.toFixed(0)}<span id="unit">°F</span></p>`
+                iconActualWheaterState.src = `${weatherData.current.condition.icon}`
+                actualWheaterState.innerText = `${weatherData.current.condition.text}`
+                const highlights = weatherData.forecast.forecastday
+
+                highlights.map((tempo) => {
+                    console.log(tempo.date)
+                    console.log(tempo.day)
+                    const newHtml = `
+                    <div class="card">
+                        <h3 class="day-of-the-week">${tempo.date}</h3>
+                        <img src="${tempo.day.condition.icon}" alt="icone do estado de temperatura do dia">
+                        <p> <span id="maxima">${tempo.day.maxtemp_f.toFixed(0)}<span class="unit">°F</span></span> <span class="minima">${tempo.day.mintemp_f.toFixed(0)}<span class="unit">°F</span></span></p>
+                    </div>
+                    `
+                    cardsOfWeek.innerHTML += newHtml
+                })
+                //Wind force and direction
+                const windForce = document.querySelector('.wind-force')
+                const windDirection = document.querySelector('#wind-direction')
+                const windDegree = document.querySelector('.fa-location-arrow')
+                windForce.innerHTML = `<p class="wind-force">${weatherData.current.wind_mph} <span>mph</span></p>`
+                windDirection.innerHTML = `<p id="wind-direction"><i class="fa-solid fa-location-arrow"></i>${weatherData.current.wind_dir}</p>`
+                windDegree.style.transform = `rotate(${weatherData.current.wind_degree})`
+                //humidity
+                const percentageHum = document.querySelector('#percentage')
+                const humidityPer = document.querySelector('.humidity-percentage')
+                humidityPer.innerHTML = `<p class="humidity-percentage">${weatherData.current.humidity}<span>%</span></p>`
+                percentageHum.style.width = `${weatherData.current.humidity}`
+                //visibility
+                const visibility = document.querySelector('#visibility-value')
+                visibility.innerHTML = `<p id="visibility-value">${weatherData.current.vis_miles} <span>miles</span></p>`
+                // air pression
+                const pressureValue = document.querySelector('#pressure-value')
+                pressureValue.innerHTML = `<p id="pressure-value">${weatherData.current.pressure_mb} <span>mb</span></p>`
+            })
+            .catch(error => {
+                alert('Erro na busca, digite o nome de um lugar ou corrija o nome digitado!')
+                inputSearch.value = ''
+            })
+        }
+    })
 
 // Data config
 const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
@@ -36,120 +162,3 @@ exitSearch.addEventListener('click', ()=> {
     sidebar.classList.toggle('hidden')
     searchSidebar.classList.toggle('hidden')
 })
-searchLocation.addEventListener('click', () => {
-    const inputLocationValue = inputSearch.value
-    console.log(inputLocationValue)
-    sidebar.classList.toggle('hidden')
-    searchSidebar.classList.toggle('hidden')
-    inputSearch.value = ''
-    api.get(`forecast.json?key=${apiKey}&q=${inputLocationValue}&days=5&aqi=yes&alerts=no`)
-    .then(weather => {
-        const weatherData = weather.data
-        console.log(weatherData)
-        currentLocation.innerHTML = `<p id="current-location"><i class="fa-solid fa-location-dot"></i> ${weatherData.location.name}</p>`
-        temperature.innerHTML = `<p id="temperature">${weatherData.current.temp_c.toFixed(0)}<span id="unit">°C</span></p>`
-        iconActualWheaterState.src = `${weatherData.current.condition.icon}`
-        if (weatherData.current.condition.text === 'Partly cloudy') {
-            actualWheaterState.innerText = `Parcialmente Nublado`
-        } else if (weatherData.current.condition.text === 'Sunny' && weatherData.current.condition.text === 'clear') {
-            actualWheaterState.innerText = `Céu Limpo/Ensolarado`
-        } else if (weatherData.current.condition.text === 'Cloudy') {
-            actualWheaterState.innerText = `Nublado`
-        } else if (weatherData.current.condition.text === 'Overcast') {
-            actualWheaterState.innerText = `Completamente Nublado`
-        } else if (weatherData.current.condition.text === 'Mist') {
-            actualWheaterState.innerText = `Névoa`
-        } else if (weatherData.current.condition.text === 'Patchy rain possible') {
-            actualWheaterState.innerText = `Possivel Chuva Irregular`
-        } else if (weatherData.current.condition.text === 'Patchy snow possible') {
-            actualWheaterState.innerText = `Possivel Neve Irregular`
-        } else if (weatherData.current.condition.text === 'Patchy sleet possible') {
-            actualWheaterState.innerText = `Possivel Granizo Irregular`
-        } else if (weatherData.current.condition.text === 'Patchy freezing drizzle possible') {
-            actualWheaterState.innerText = `possível Neve Congelante Irregular`
-        } else if (weatherData.current.condition.text === 'Thundery outbreaks possible') {
-            actualWheaterState.innerText = `Possiveis Relampagos`
-        } else if (weatherData.current.condition.text === 'Blowing snow') {
-            actualWheaterState.innerText = `Sopro de Neve`
-        } else if (weatherData.current.condition.text === 'Blizzard') {
-            actualWheaterState.innerText = `Nevasca`
-        } else if (weatherData.current.condition.text === 'Fog') {
-            actualWheaterState.innerText = `Névoa`
-        } else if (weatherData.current.condition.text === 'Freezing fog') {
-            actualWheaterState.innerText = `Névoa Congelante`
-        } else if (weatherData.current.condition.text === 'Patchy light drizzle') {
-            actualWheaterState.innerText = `Garoa Leve Irregular`
-        } else if (weatherData.current.condition.text === 'Light drizzle') {
-            actualWheaterState.innerText = `Garoa Leve`
-        } else if (weatherData.current.condition.text === 'Freezing drizzle') {
-            actualWheaterState.innerText = `Garoa Congelante`
-        } else if (weatherData.current.condition.text === 'Heavy freezing drizzle') {
-            actualWheaterState.innerText = `Garoa Forte e Congelante`
-        } else if (weatherData.current.condition.text === 'Patchy light rain') {
-            actualWheaterState.innerText = `Chuva Leve Irregular`
-        } else if (weatherData.current.condition.text === 'Light rain') {
-            actualWheaterState.innerText = `Chuva Leve`
-        } else if (weatherData.current.condition.text === 'Moderate rain at times') {
-            actualWheaterState.innerText = `Chuva Moderada as vezes`
-        } else if (weatherData.current.condition.text === 'Moderate rain') {
-            actualWheaterState.innerText = `Chuva Moderada`
-        } else if (weatherData.current.condition.text === 'Heavy rain at times') {
-            actualWheaterState.innerText = `Chuva Forte as Vezes`
-        } else if (weatherData.current.condition.text === 'Heavy rain') {
-            actualWheaterState.innerText = `Chuva Forte`
-        } else if (weatherData.current.condition.text === 'Light freezing rain') {
-            actualWheaterState.innerText = `Chuva Congelante Leve`
-        } else if (weatherData.current.condition.text === 'Moderate or heavy freezing rain') {
-            actualWheaterState.innerText = `Chuva Congelante Forte ou Moderada`
-        } else if (weatherData.current.condition.text === 'Light sleet') {
-            actualWheaterState.innerText = `granizo leve`
-        } else if (weatherData.current.condition.text === 'Moderate or heavy sleet') {
-            actualWheaterState.innerText = `Nevasca moderada ou forte`
-        } else if (weatherData.current.condition.text === 'Patchy light snow') {
-            actualWheaterState.innerText = `Neve fraca irregular`
-        } else if (weatherData.current.condition.text === 'Light snow') {
-            actualWheaterState.innerText = `Pouca neve`
-        } else if (weatherData.current.condition.text === 'Neve moderada irregular') {
-            actualWheaterState.innerText = `Céu Limpo`
-        } else if (weatherData.current.condition.text === 'Moderate snow') {
-            actualWheaterState.innerText = `neve moderada`
-        } else if (weatherData.current.condition.text === 'Patchy heavy snow') {
-            actualWheaterState.innerText = `Neve pesada irregular`
-        } else if (weatherData.current.condition.text === 'Heavy snow') {
-            actualWheaterState.innerText = `Nevasca Forte`
-        } else if (weatherData.current.condition.text === 'Ice pellets') {
-            actualWheaterState.innerText = `Pelotas de gelo`
-        } else if (weatherData.current.condition.text === 'Light rain shower') {
-            actualWheaterState.innerText = `Chuva leve`
-        } else if (weatherData.current.condition.text === 'Moderate or heavy rain shower') {
-            actualWheaterState.innerText = `Pancada de chuva moderada ou forte`
-        } else if (weatherData.current.condition.text === 'Torrential rain shower') {
-            actualWheaterState.innerText = `chuva torrencial`
-        } else if (weatherData.current.condition.text === 'Light sleet showers') {
-            actualWheaterState.innerText = `Chuvas leves de granizo`
-        } else if (weatherData.current.condition.text === 'Moderate or heavy sleet showers') {
-            actualWheaterState.innerText = `Pancadas de granizo moderadas ou fortes`
-        } else if (weatherData.current.condition.text === 'Light snow showers') {
-            actualWheaterState.innerText = `Nevascas leves`
-        } else if (weatherData.current.condition.text === 'Moderate or heavy snow showers') {
-            actualWheaterState.innerText = `Pancadas de neve moderadas ou fortes`
-        } else if (weatherData.current.condition.text === 'Light showers of ice pellets') {
-            actualWheaterState.innerText = `Chuvas leves de pelotas de gelo`
-        } else if (weatherData.current.condition.text === 'Moderate or heavy showers of ice pellets') {
-            actualWheaterState.innerText = `Chuvas moderadas ou pesadas de pelotas de gelo`
-        } else if (weatherData.current.condition.text === 'Patchy light rain with thunder') {
-            actualWheaterState.innerText = `Chuva fraca irregular com trovão`
-        } else if (weatherData.current.condition.text === 'Moderate or heavy rain with thunder') {
-            actualWheaterState.innerText = `Chuva moderada ou forte com trovoada`
-        } else if (weatherData.current.condition.text === 'Patchy light snow with thunder') {
-            actualWheaterState.innerText = `Neve fraca irregular com trovão`
-        } else{
-            actualWheaterState.innerText = `Neve moderada ou forte com trovoada`
-        }
-        })
-    .catch(error => {
-        alert('Erro na busca, digite o nome de um lugar ou corrija o nome digitado!')
-        inputSearch.value = ''
-    })
-})
-

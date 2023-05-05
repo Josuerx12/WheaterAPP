@@ -86,7 +86,7 @@ body {
     justify-content: space-around;
     flex: 1;
     min-height: 100vh;
-    padding: 2rem;
+    padding: 1rem;
     background-color: var(--bg-color-sidebar);
     background-image: url(./assets/img/Cloud-background.png);
     background-repeat: no-repeat;
@@ -135,6 +135,7 @@ body {
     width: fit-content;
     color: var(--main-txt-color);
     cursor: pointer;
+    margin: 4rem 2rem 2rem 2rem;
 }
 
 .search-sidebar nav {
@@ -334,7 +335,7 @@ body {
 }
 
 #percentage {
-    width: 84%;
+    width: 0%;
     height: 8px;
     border-radius: 80px 0 0 80px;
     background: #FFEC65;
@@ -417,7 +418,14 @@ footer {
     .wind-container h3,
     .air-pressure-container h3 {
         max-width: 250px;
-}
+    }
+    .fa-magnifying-glass input {
+        width: 10rem;
+        height: 2rem;
+    }
+    .search-sidebar {
+        padding: 1rem;
+    }
 }
 
 @media (max-width: 450px) {
@@ -431,4 +439,12 @@ footer {
     .sidebar {
     background-size: 30rem 16.5rem;
     }
+    .fa-magnifying-glass input {
+        max-width: 6rem;
+        height: 1rem;
+    }
+    #procurar {
+        padding: 1.1rem !important;
+        cursor: pointer;
+    }    
 }
