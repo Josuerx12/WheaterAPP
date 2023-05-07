@@ -5,7 +5,7 @@ const myLocation = document.querySelector(".location-btn");
 const iconActualWheaterState = document.querySelector(
   "#icon-actual-wheater-state"
 );
-const temperature = document.querySelector("#temperature");
+const temperature = document.querySelector(".temperature");
 const actualWheaterState = document.querySelector("#actual-wheater-state");
 const actualDaySidebar = document.querySelector("#actual-day");
 const currentLocation = document.querySelector("#current-location");
@@ -43,11 +43,35 @@ searchLocation.addEventListener("click", () => {
     )
     .then((weather) => {
       const weatherData = weather.data;
+      //aside data api
+      const currentTemp = weatherData.current.temp_c.toFixed(0)
+      const currentTempF = Number((currentTemp * 1.8) + 32).toFixed(0);
+
+      celciusBtn.addEventListener("click", () => {
+        temperature.innerText = `${currentTemp}`;
+        unit3.innerText = "°C"
+        temperature.appendChild(unit3);
+      })
+      fahrenheitBtn.addEventListener("click", () => {
+        temperature.innerText = `${currentTempF}`;
+        unit3.innerText = "°F"
+        temperature.appendChild(unit3);
+      })
+      //elements
+      //(unit span)
+      const unit3 = document.createElement('span');
+      unit3.classList.add('unit');
+      unit3.innerText = "°C"
+      //(dot icon)
+      const dotIcon = document.createElement('i')
+      dotIcon.classList.add('fa-solid');
+      dotIcon.classList.add('fa-location-dot')
+      //
       console.log(weatherData);
-      currentLocation.innerHTML = `<p id="current-location"><i class="fa-solid fa-location-dot"></i> ${weatherData.location.name}</p>`;
-      temperature.innerHTML = `<p id="temperature">${weatherData.current.temp_c.toFixed(
-        0
-      )}<span id="unit">°C</span></p>`;
+      currentLocation.innerText = `${weatherData.location.name}`;
+      currentLocation.appendChild(dotIcon);
+      temperature.innerText = `${currentTemp}`;
+      temperature.appendChild(unit3);
       iconActualWheaterState.src = `${weatherData.current.condition.icon}`;
       actualWheaterState.innerText = `${weatherData.current.condition.text}`;
       const highlights = weatherData.forecast.forecastday;
@@ -55,6 +79,9 @@ searchLocation.addEventListener("click", () => {
       highlights.map((tempo) => {
         console.log(tempo.date);
         console.log(tempo.day);
+
+        const maxTemp = tempo.day.maxtemp_c.toFixed(0)
+        const minTemp = tempo.day.mintemp_c.toFixed(0)
         //card weather week
         //div card
         const div = document.createElement('div')
@@ -67,36 +94,47 @@ searchLocation.addEventListener("click", () => {
         const img = document.createElement('img')
         img.src = `${tempo.day.condition.icon}`
         //span 
+        const unit = document.createElement('span')
+        unit.innerText = "°C"
+        unit.classList.add('unit')
+        const unit2 = document.createElement('span')
+        unit2.classList.add('unit')
+        unit2.innerText = "°C"
         const maxima = document.createElement('span')
         maxima.classList.add('maxima')
-        maxima.innerText = `${tempo.day.maxtemp_c.toFixed(0)}`
+        maxima.innerText = `${maxTemp}`
+        maxima.appendChild(unit)
         const minima = document.createElement('span')
         minima.classList.add('minima')
-        minima.innerText = `${tempo.day.mintemp_c.toFixed(0)}`
-        const unit = document.createElement('span')
-        unit.classList.add('unit')
-        unit.innerText = "°C"
-        console.log(maxima)
+        minima.innerText = `${minTemp}`
+        minima.appendChild(unit2)
+        //conversor celcius para fahrenheit
+        celciusBtn.addEventListener('click', () => {
+          unit.innerText = "°C"
+          unit2.innerText = "°C"
+          maxima.innerText = `${maxTemp}`
+          minima.innerText = `${minTemp}`
+          maxima.appendChild(unit)
+          minima.appendChild(unit2)
+        })
+        fahrenheitBtn.addEventListener('click', () => {
+          const maxTempF = Number((maxTemp * 1.8) + 32).toFixed(0)
+          const minTempF = Number((minTemp * 1.8) + 32).toFixed(0)
+          unit.innerText = "°F"
+          unit2.innerText = "°F"
+          maxima.innerText = `${maxTempF}`
+          minima.innerText = `${minTempF}`
+          maxima.appendChild(unit)
+          minima.appendChild(unit2)
+        })
         //p
         const p = document.createElement('p')
         p.appendChild(maxima)
         p.appendChild(minima)
         // mount cards
-            div.appendChild(h3)
-            div.appendChild(img)
-            div.appendChild(p)
-            console.log (div)
-            console.log(p)
-        //
-        // const newHtml = `
-        //                 <div class="card">
-        //                     <h3 class="day-of-the-week">${tempo.date}</h3>
-        //                     <img src="${
-        //                       tempo.day.condition.icon
-        //                     }" alt="icone do estado de temperatura do dia">
-        //                     <p> <span id="maxima">${tempo.day.maxtemp_c.toFixed(0)}<span class="unit">°C</span></span> <span class="minima">${tempo.day.mintemp_c.toFixed(0)}<span class="unit">°C</span></span></p>
-        //                 </div>
-        //                 `;
+        div.appendChild(h3)
+        div.appendChild(img)
+        div.appendChild(p)
         cardsOfWeek.appendChild(div)
       });
       //Wind force and direction
@@ -126,7 +164,6 @@ searchLocation.addEventListener("click", () => {
       inputSearch.value = "";
     });
 });
-
 // Data config
 const months = [
   "Janeiro",
