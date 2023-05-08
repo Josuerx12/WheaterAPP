@@ -159,9 +159,19 @@ searchLocation.addEventListener("click", () => {
         });
       })
       .catch((error) => {
-        alert(
-          "Erro na busca, digite o nome de um lugar ou corrija o nome digitado!"
-        );
+        const errorMessage = document.createElement("h2");
+        errorMessage.innerText = 'Possivel erro de digitação no nome da localização ou erro ao carregar a API do Tempo'
+        errorMessage.style.display = "block";
+        errorMessage.style.textAlign = "center";
+        errorMessage.style.width = "100%"
+        errorMessage.style.height = "4rem"
+        errorMessage.style.padding = "4rem"
+        errorMessage.style.color = "red";
+        errorMessage.style.backgroundColor = "#000"
+
+        error => document.body.appendChild(errorMessage);
+        alert('error: Erro na pesquisa ou no carregamento da API do tempo')
+
         inputSearch.value = "";
       });
 });
