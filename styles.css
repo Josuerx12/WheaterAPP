@@ -40,6 +40,7 @@ body {
     font-size: 2rem;
     color: var(--second-txt-color);
     font-weight: 600;
+    text-align: center;
 }
 
 #actual-day {
@@ -147,7 +148,7 @@ body {
     width: fit-content;
     color: var(--main-txt-color);
     cursor: pointer;
-    margin: 4rem 2rem 2rem 2rem;
+    margin-bottom: 2rem;
 }
 
 .search-sidebar nav {
@@ -172,6 +173,7 @@ body {
     margin: 0 1rem;
     font-size: 1.3rem;
     color: var(--second-txt-color);
+    cursor: pointer;
 }
 
 .location-btn {
@@ -216,7 +218,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    opacity: .7;
 }
 
 .selected {
@@ -306,11 +308,11 @@ body {
 }
 
 .fa-location-arrow {
-    transform: rotate(315deg);
     padding: .6rem;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.3);
     text-align: center;
+    transform: rotate(315deg);
 }
 
 .humidity-container h3,
