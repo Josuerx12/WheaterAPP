@@ -156,22 +156,16 @@ searchLocation.addEventListener("click", () => {
         pressureValue.innerHTML = `<p id="pressure-value">${weatherData.current.pressure_mb} <span>mb</span></p>`;
         searchSidebarBtn.addEventListener("click", () => {
           cardsOfWeek.innerHTML = "";
+          celciusBtn.style.opacity = "0.5"
+          celciusBtn.style.cursor = "default"
+          fahrenheitBtn.style.opacity = "0.5"
+          fahrenheitBtn.style.cursor = "default"
+          celciusBtn.classList.add('selected')
+          fahrenheitBtn.classList.remove('selected')
         });
       })
       .catch((error) => {
-        const errorMessage = document.createElement("h2");
-        errorMessage.innerText = 'Possivel erro de digitação no nome da localização ou erro ao carregar a API do Tempo'
-        errorMessage.style.display = "block";
-        errorMessage.style.textAlign = "center";
-        errorMessage.style.width = "100%"
-        errorMessage.style.height = "4rem"
-        errorMessage.style.padding = "4rem"
-        errorMessage.style.color = "red";
-        errorMessage.style.backgroundColor = "#000"
-
-        error => document.body.appendChild(errorMessage);
-        alert('error: Erro na pesquisa ou no carregamento da API do tempo')
-
+        alert('error: Erro na pesquisa ou no carregamento do banco de dados')
         inputSearch.value = "";
       });
 });
